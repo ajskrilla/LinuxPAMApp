@@ -1,0 +1,16 @@
+compile
+
+gcc -fPIC -Wall -I/usr/include/security -c -o pam_local.o src/pam_local.c
+
+link
+
+gcc -shared -lpam -o pam_local.so pam_local.o
+
+
+full build:
+
+make clean && make
+sudo cp pam_local.so /lib64/security/
+
+retest:
+pamtester testapp yourusername authenticate
